@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Flex, Text, useThemeUI } from "theme-ui";
+import { Button, Flex, Text, useThemeUI, ThemeUIStyleObject } from "theme-ui";
 import { IoTrashBin } from "react-icons/io5";
 import { useFormik } from "formik";
 import { TextInput } from "../components/textInput/TextInput";
@@ -7,6 +7,29 @@ import { chainFormSchema } from "../schema";
 import { IChain } from "../interfaces/chain";
 import { updateArr } from "../utils/updateArr";
 import { deleteItem } from "../utils/deleteItem";
+
+const ChainStyle: ThemeUIStyleObject = {
+  width: "fit-content",
+  px: "10px",
+  py: "7px",
+  gap: "14px",
+  border: `1px solid #FA831A`,
+  backgroundColor: "#FDC99B",
+  borderRadius: "8px",
+  mt: "10px",
+};
+
+const TrashIconStyle: ThemeUIStyleObject = {
+  cursor: "pointer",
+  transition: "transform 0.2s ease-in-out",
+  "&:hover": {
+    outline: "none",
+    transform: "rotate(25deg)",
+  },
+  svg: {
+    fill: "red",
+  },
+};
 
 interface IChainForm {
   chains: IChain[];
@@ -44,20 +67,8 @@ const ChainForm = ({ chains }: IChainForm): JSX.Element => {
     },
   });
 
-  const {
-    values,
-    setFieldValue,
-    errors,
-    touched,
-    handleBlur,
-    resetForm,
-    handleSubmit,
-  } = formik;
-  console.log("selectedChain", selectedChain);
-  console.log(
-    "ls-Chains",
-    JSON.parse(localStorage.getItem("chains") as string)
-  );
+  const { values, setFieldValue, errors, touched, handleBlur, handleSubmit } =
+    formik;
 
   return (
     <Flex sx={{ flexDirection: "column" }}>
@@ -66,8 +77,6 @@ const ChainForm = ({ chains }: IChainForm): JSX.Element => {
           width: "100%",
           backgroundColor: "bgGrey",
           flexDirection: "column",
-
-          // gap: "30px",
         }}
       >
         <TextInput
@@ -82,26 +91,14 @@ const ChainForm = ({ chains }: IChainForm): JSX.Element => {
           error={errors["name"]}
           touched={touched["name"]}
         />
-        {chains.length > 0 ? (
+        {chains?.length > 0 ? (
           <Text sx={{ mt: "20px", fontWeight: "bold" }}>
             Click chain name to edit chain
           </Text>
         ) : null}
         <Flex sx={{ mt: "5px", gap: "35px", flexWrap: "wrap" }}>
           {chains?.map((ch) => (
-            <Flex
-              sx={{
-                width: "fit-content",
-                px: "10px",
-                py: "7px",
-                gap: "14px",
-                border: `1px solid ${theme?.colors?.primary}`,
-                backgroundColor: "#FDC99B",
-                borderRadius: "8px",
-                mt: "10px",
-              }}
-              key={ch._id}
-            >
+            <Flex sx={ChainStyle} key={ch._id}>
               <Text
                 sx={{ cursor: "pointer", "&:hover": { color: "primary" } }}
                 onClick={() => {
@@ -111,19 +108,7 @@ const ChainForm = ({ chains }: IChainForm): JSX.Element => {
               >
                 {ch.name}
               </Text>{" "}
-              <Flex
-                sx={{
-                  cursor: "pointer",
-                  transition: "transform 0.2s ease-in-out",
-                  "&:hover": {
-                    outline: "none",
-                    transform: "rotate(25deg)",
-                  },
-                  svg: {
-                    fill: "red",
-                  },
-                }}
-              >
+              <Flex sx={TrashIconStyle}>
                 <IoTrashBin
                   size={24}
                   onClick={() => handleDeleteChain(ch._id)}

@@ -1,6 +1,12 @@
 import ReactApp, { useEffect, useState } from "react";
 import "./App.css";
-import { Button, Text, ThemeProvider, Flex } from "theme-ui";
+import {
+  Button,
+  Text,
+  ThemeProvider,
+  Flex,
+  ThemeUIStyleObject,
+} from "theme-ui";
 import { theme } from "./theme";
 import NavBar from "./components/navBar";
 import HotelCard from "./components/hotelCard";
@@ -10,6 +16,21 @@ import { IChain } from "./interfaces/chain";
 import ChainForm from "./panels/chainForm";
 import { deleteItem } from "./utils/deleteItem";
 import { Select } from "antd";
+
+const PanelStyle: ThemeUIStyleObject = {
+  py: "40px",
+  px: "100px",
+  flexDirection: "column",
+  gap: "30px",
+  boxShadow: "0px 1px 15px 0px rgba(0,0,0,0.1) inset",
+  minHeight: "80vh",
+};
+
+const InnerContainerStyle: ThemeUIStyleObject = {
+  flexDirection: "column",
+  width: "100%",
+  backgroundColor: "bgGrey",
+};
 
 const App = (): JSX.Element => {
   const [hotels, setHotels] = useState<IHotel[] | null>([]);
@@ -56,8 +77,6 @@ const App = (): JSX.Element => {
       ) as IHotel[]
     );
   };
-
-  console.log("filteredHotels", filteredHotels);
 
   const renderHotelsList = () => {
     return (
@@ -158,30 +177,13 @@ const App = (): JSX.Element => {
   return (
     <ThemeProvider theme={theme}>
       <div style={{ padding: "20px 60px" }}>
-        <Flex
-          sx={{
-            flexDirection: "column",
-            width: "100%",
-            backgroundColor: "bgGrey",
-          }}
-        >
+        <Flex sx={InnerContainerStyle}>
           <NavBar
             tabs={["Home", "Chain", "Hotel"]}
             activeTab={activeTab}
             setActiveTab={handleTabChange}
           />
-          <Flex
-            sx={{
-              py: "40px",
-              px: "100px",
-              flexDirection: "column",
-              gap: "30px",
-              boxShadow: "0px 1px 15px 0px rgba(0,0,0,0.1) inset",
-              minHeight: "80vh",
-            }}
-          >
-            {renderActivePanel()}
-          </Flex>
+          <Flex sx={PanelStyle}>{renderActivePanel()}</Flex>
         </Flex>
       </div>
     </ThemeProvider>

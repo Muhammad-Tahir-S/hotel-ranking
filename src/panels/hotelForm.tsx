@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Flex, Text } from "theme-ui";
+import { Box, Button, Flex, Text, ThemeUIStyleObject } from "theme-ui";
 import { IHotel } from "../interfaces/hotel";
 import { useFormik } from "formik";
 import { TextInput } from "../components/textInput/TextInput";
@@ -8,6 +8,18 @@ import { hotelFormSchema } from "../schema";
 import { motion } from "framer-motion";
 import { IChain } from "../interfaces/chain";
 import { updateArr } from "../utils/updateArr";
+
+const InputRowStyle: ThemeUIStyleObject = {
+  gap: "30px",
+  mt: "10px",
+  flexWrap: ["wrap", "nowrap"],
+};
+
+const InputsContainerStyle: ThemeUIStyleObject = {
+  width: "100%",
+  backgroundColor: "bgGrey",
+  flexDirection: "column",
+};
 
 interface IHotelForm {
   chains: IChain[];
@@ -63,15 +75,8 @@ const HotelForm = ({ chains, hotel }: IHotelForm): JSX.Element => {
     },
   });
 
-  const {
-    values,
-    setFieldValue,
-    errors,
-    touched,
-    handleBlur,
-    resetForm,
-    handleSubmit,
-  } = formik;
+  const { values, setFieldValue, errors, touched, handleBlur, handleSubmit } =
+    formik;
 
   const handleChainChange = (value: string) => {
     setFieldValue("chain", value);
@@ -83,14 +88,8 @@ const HotelForm = ({ chains, hotel }: IHotelForm): JSX.Element => {
 
   return (
     <Flex sx={{ flexDirection: "column" }}>
-      <Flex
-        sx={{
-          width: "100%",
-          backgroundColor: "bgGrey",
-          flexDirection: "column",
-        }}
-      >
-        <Flex sx={{ gap: "30px", mt: "10px", flexWrap: ["wrap", "nowrap"] }}>
+      <Flex sx={InputsContainerStyle}>
+        <Flex sx={InputRowStyle}>
           <TextInput
             id="name"
             type="text"
@@ -116,7 +115,7 @@ const HotelForm = ({ chains, hotel }: IHotelForm): JSX.Element => {
             touched={touched["city"]}
           />
         </Flex>
-        <Flex sx={{ gap: "30px", mt: "10px", flexWrap: ["wrap", "nowrap"] }}>
+        <Flex sx={InputRowStyle}>
           <TextInput
             id="country"
             type="text"
@@ -142,7 +141,7 @@ const HotelForm = ({ chains, hotel }: IHotelForm): JSX.Element => {
             touched={touched["address"]}
           />
         </Flex>
-        <Flex sx={{ gap: "30px", mt: "10px", flexWrap: ["wrap", "nowrap"] }}>
+        <Flex sx={InputRowStyle}>
           <TextInput
             id="price"
             type="text"
@@ -173,9 +172,6 @@ const HotelForm = ({ chains, hotel }: IHotelForm): JSX.Element => {
         <Flex sx={{ gap: "30px", mt: "10px", alignItems: "flex-end" }}>
           <Box
             sx={{
-              div: {
-                div: { alignItems: "center" },
-              },
               flex: "1",
             }}
           >
@@ -233,9 +229,6 @@ const HotelForm = ({ chains, hotel }: IHotelForm): JSX.Element => {
           </Box>
           <Box
             sx={{
-              div: {
-                div: { alignItems: "center" },
-              },
               flex: "1",
             }}
           >
