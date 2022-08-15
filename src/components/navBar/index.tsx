@@ -7,7 +7,7 @@ const NavBar = ({ tabs, activeTab, setActiveTab }: ITabs): JSX.Element => {
     <Flex
       sx={{
         width: "100%",
-        px: "100px",
+        px: ["30px", "100px"],
         py: "20px",
         justifyContent: "center",
         backgroundColor: "white",

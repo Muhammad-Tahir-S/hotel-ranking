@@ -19,7 +19,7 @@ import { Select } from "antd";
 
 const PanelStyle: ThemeUIStyleObject = {
   py: "40px",
-  px: "100px",
+  px: ["30px", "100px"],
   flexDirection: "column",
   gap: "30px",
   boxShadow: "0px 1px 15px 0px rgba(0,0,0,0.1) inset",
