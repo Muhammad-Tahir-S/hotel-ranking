@@ -1,4 +1,4 @@
-import ReactApp, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import {
   Button,
@@ -176,7 +176,7 @@ const App = (): JSX.Element => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div style={{ padding: "20px 60px" }}>
+      <Flex sx={{ padding: ["10px 20px", "20px 60px"] }}>
         <Flex sx={InnerContainerStyle}>
           <NavBar
             tabs={["Home", "Chain", "Hotel"]}
@@ -185,7 +185,7 @@ const App = (): JSX.Element => {
           />
           <Flex sx={PanelStyle}>{renderActivePanel()}</Flex>
         </Flex>
-      </div>
+      </Flex>
     </ThemeProvider>
   );
 };

@@ -28,7 +28,7 @@ const HotelCard = ({
         width: "100%",
         backgroundColor: "white",
         borderRadius: "8px",
-        flexWrap: ["wrap", "nowrap"],
+        flexDirection: ["column", "row"],
       }}
     >
       <div>
@@ -49,15 +49,24 @@ const HotelCard = ({
           width: "100%",
           alignSelf: "center",
           px: "25px",
-          height: "100%",
+          py: ["20px", 0],
+          flexDirection: ["column", "row"],
         }}
       >
-        <Flex sx={{ flexDirection: "column", flexWrap: "wrap" }}>
+        <Flex sx={{ flexDirection: "column" }}>
           <Button sx={{ width: "fit-content", px: "7px" }} variant="muted">
             {chain || "No Chain"}
           </Button>
           <Flex sx={{ flexDirection: "column", gap: "8px", my: "17px" }}>
-            <Text sx={{ fontSize: "24px", fontWeight: "bold" }}>{name}</Text>
+            <Text
+              sx={{
+                fontSize: "24px",
+                fontWeight: "bold",
+                wordWrap: "break-word",
+              }}
+            >
+              {name}
+            </Text>
             <Rating
               ratingValue={rating as number}
               readonly={true}
@@ -77,9 +86,10 @@ const HotelCard = ({
         </Flex>
         <Flex
           sx={{
-            flexDirection: "column",
+            flexDirection: ["row", "column"],
             justifyContent: "space-between",
-            alignItems: "flex-end",
+            alignItems: ["center", "flex-end"],
+            py: ["10px", 0],
           }}
         >
           <Text

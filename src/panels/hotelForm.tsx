@@ -252,7 +252,7 @@ const HotelForm = ({ chains, hotel }: IHotelForm): JSX.Element => {
 
         <Flex sx={{ justifyContent: "center", mt: "40px" }}>
           <Button
-            sx={{ height: "44px", width: "40%" }}
+            sx={{ height: "44px", width: ["80%", "40%"] }}
             onClick={() => handleSubmit()}
           >
             {hotel?._id ? "Edit" : "Add"} Hotel
